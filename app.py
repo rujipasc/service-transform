@@ -22,7 +22,7 @@ file_tran = os.getenv('FILE_TRAN')
 
 ALLOWED_DOWNLOAD_HOURS = 1
 
-def delayed_delete(files_to_delete, delay=15):
+def delayed_delete(files_to_delete, delay=30):
     time.sleep(delay)
     for file_path in files_to_delete:
         try:

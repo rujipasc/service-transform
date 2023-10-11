@@ -13,6 +13,7 @@ def transform_data (file_path, file_tran):
     try:
         # df = pd.read_csv(file_path, low_memory=False)
         df = pd.read_csv(os.path.join("..", file_path), low_memory=False)
+        df['payGrade.externalCode'] = df['payGrade.externalCode'].fillna('NA')
         df['effectiveStartDate'] = pd.to_datetime(df['effectiveStartDate'], errors='coerce')
         df.dropna(subset=['effectiveStartDate'], inplace=True) # drops the rows where date conversion failed
         df.sort_values(by=['code', 'effectiveStartDate'], ascending=[True, False], inplace=True)
@@ -72,6 +73,6 @@ def transform_data (file_path, file_tran):
         print(df2.head())
         
         # df2.to_csv(file_tran, index=False, encoding='utf8')
-        df2.to_csv(file_tran , index=False, encoding='utf8')
+        df2.to_csv(file_tran , index=False, encoding='utf-8-sig')
     except Exception as e:
         print(f"An error occurred: {e}")
